@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subestaciones del SEP colombiano · Herramienta de estudio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <p class="eyebrow">Universidad de La Salle · Ingeniería Eléctrica · Centrales y Subestaciones</p>
+  <h1>Subestaciones del Sistema Eléctrico de Potencia colombiano</h1>
+  <p class="sub">Identifica y afianza las partes principales de una subestación.</p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button role="tab" id="t-explorar" data-tab="explorar" aria-selected="true">Explorar</button>
+  <button role="tab" id="t-tarjetas" data-tab="tarjetas" aria-selected="false">Tarjetas</button>
+  <button role="tab" id="t-quiz"     data-tab="quiz"     aria-selected="false">Quiz</button>
+  <button role="tab" id="t-sep"      data-tab="sep"      aria-selected="false">Contexto SEP</button>
+</nav>
+
+<main>
+
+  <!-- ===== EXPLORAR ===== -->
+  <section id="tab-explorar" class="panel" role="tabpanel" aria-labelledby="t-explorar">
+    <p class="hint">Diagrama unifilar simplificado de una subestación <strong>230/115 kV</strong>
+      (interconexión STN–STR). Toca un equipo para ver su función.</p>
+    <label class="toggle">
+      <input type="checkbox" id="chk-nombres" checked>
+      <span>Mostrar nombres (desactívalo para autoevaluarte)</span>
+    </label>
+    <div id="diagrama" class="diagrama"></div>
+    <article id="info" class="info" aria-live="polite">
+      <p class="placeholder">Toca un equipo del diagrama para ver su información.</p>
+    </article>
+  </section>
+
+  <!-- ===== TARJETAS ===== -->
+  <section id="tab-tarjetas" class="panel" role="tabpanel" aria-labelledby="t-tarjetas" hidden>
+    <div class="row">
+      <label class="select-wrap">Mostrar
+        <select id="filtro-tarjetas">
+          <option value="todas">Todas</option>
+          <option value="repasar">Solo por repasar</option>
+        </select>
+      </label>
+      <span id="progreso-tarjetas" class="muted"></span>
+    </div>
+    <div id="tarjeta" class="flashcard" tabindex="0" role="button" aria-label="Voltear tarjeta"></div>
+    <div class="row center">
+      <button class="btn ghost" id="t-prev">← Anterior</button>
+      <button class="btn ghost" id="t-next">Siguiente →</button>
+    </div>
+    <div class="row center">
+      <button class="btn warn" id="t-repasar">↻ Repasar</button>
+      <button class="btn ok" id="t-sabe">✓ Lo sé</button>
+    </div>
+    <p class="muted center">Toca la tarjeta para voltearla.</p>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section id="tab-quiz" class="panel" role="tabpanel" aria-labelledby="t-quiz" hidden>
+    <div id="quiz"></div>
+  </section>
+
+  <!-- ===== CONTEXTO SEP ===== -->
+  <section id="tab-sep" class="panel" role="tabpanel" aria-labelledby="t-sep" hidden>
+    <h2>Niveles de tensión en el SIN</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sistema</th><th>Rango</th><th>Niveles típicos</th></tr></thead>
+        <tbody>
+          <tr><td>STN – Sistema de Transmisión Nacional</td><td>≥ 220 kV</td><td>230 kV, 500 kV</td></tr>
+          <tr><td>STR – Sistemas de Transmisión Regional</td><td>≥ 57,5 kV y &lt; 220 kV</td><td>110 / 115 kV</td></tr>
+          <tr><td>SDL – Sistemas de Distribución Local</td><td>&lt; 57,5 kV</td><td>34,5 kV, 13,2 kV</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Tipos de subestación según su función</h2>
+    <ul class="list">
+      <li><strong>Elevadora:</strong> junto a la central; sube la tensión de generación para transportar la energía.</li>
+      <li><strong>De maniobra / interconexión:</strong> conecta líneas y reparte flujos sin cambiar el nivel de tensión.</li>
+      <li><strong>De transformación (reductora):</strong> baja la tensión entre niveles (p. ej. 230/115 kV o 500/230 kV).</li>
+      <li><strong>De distribución:</strong> entrega a los circuitos que alimentan a los usuarios finales.</li>
+    </ul>
+
+    <h2>Según el aislamiento</h2>
+    <ul class="list">
+      <li><strong>AIS</strong> (aislada en aire): patio a la intemperie, la más común.</li>
+      <li><strong>GIS</strong> (aislada en gas SF₆): compacta, útil donde hay poco espacio o ambientes agresivos.</li>
+      <li><strong>Híbrida:</strong> combina equipos AIS y módulos encapsulados.</li>
+    </ul>
+
+    <h2>Actores y normativa (Colombia)</h2>
+    <ul class="list">
+      <li><strong>XM:</strong> opera el SIN (Centro Nacional de Despacho) y administra el mercado mayorista.</li>
+      <li><strong>CREG:</strong> regula el servicio, incluido el Código de Redes.</li>
+      <li><strong>UPME:</strong> planeación del sector (planes de expansión de generación y transmisión).</li>
+      <li><strong>RETIE:</strong> Reglamento Técnico de Instalaciones Eléctricas; seguridad de las instalaciones.</li>
+      <li><strong>Transmisores y operadores de red (OR):</strong> son propietarios y operan las subestaciones del STN, STR y SDL.</li>
+      <li><strong>Frecuencia nominal:</strong> 60 Hz.</li>
+    </ul>
+
+    <p class="note">Material de apoyo para estudio. Verifica definiciones y valores en la regulación vigente
+      (CREG, RETIE, Código de Redes) y en la información oficial de XM y UPME.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>Herramienta de apoyo para el curso Centrales y Subestaciones · Programa de Ingeniería Eléctrica</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
